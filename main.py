@@ -4,6 +4,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class MyClient(discord.Client):
+  Player1_Health = 20;
+  Player2_Health = 20;
+
   async def on_ready(self):
     print('Logged on as {0}!'.format(self.user))
 
@@ -20,8 +23,10 @@ class MyClient(discord.Client):
           description="Floor 1",
           color=discord.Color.blue()
       )
-      embed.add_field(name=message.author.name ,value= message.author.avatar.url, inline=False)
-      embed.add_field(name="Field 2", value="Another value", inline=True)
+      embed.add_field(name=message.author.name ,value= self.Player1_Health, inline=False)
+      embed.set_image(url=message.author.avatar.url)
+      embed.add_field(name="HP", value=self.Player1_Health, inline=True)
+      embed.add_field(name=message.author.name ,value= self.Player2_Health, inline=False)
       embed.add_field(name="Field 3", value="Another value", inline=True)
       #embed.set_thumbnail(url=message.author.avatar.url)     
       embed.set_footer(text="Footer text here")
